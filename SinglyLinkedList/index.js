@@ -51,15 +51,26 @@ class SinglyLinkedList {
 
         // set the next property of the 2nd to last node to be null
         pre.next = null;
-
         // set the tail to be the 2nd to last node
         this.tail = pre;
-
         // decrement the length of te list by 1
         this.length--;
-
         return lastNode;
+    }
 
+    shift(){
+        // If there are no nodes, return undefined
+        if(!this.head) return undefined;
+        // Store the current head property in a variable
+        let currentHead = this.head;
+        // Set the head property to be the current head's next property
+        this.head = currentHead.next
+        // Decrement the length by 1
+        this.length--;
+        if(!this.length) this.tail = null;
+        // Return the value of the node removed
+        currentHead.next = null;
+        return currentHead;
     }
 
 }
@@ -71,8 +82,11 @@ list.push("2");
 list.push("3");
 list.push("4");
 
-console.log(list.pop())
-
+console.log(list.shift())
+console.log(list.shift())
+console.log(list.shift())
+console.log(list.shift())
+console.log(list)
 
 // console.log(list.head)
 // console.log(list.head.next);
