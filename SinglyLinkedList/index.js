@@ -96,28 +96,45 @@ class SinglyLinkedList {
         return this;
     }
 
+    // Get Method
+    // This function should accept an index
+    get(index){
+        // If the index is less than zero o greater than or equal to
+        // the length of the list, return null
+        if(index < 0 || index >= this.length) return null;
+
+        // Loop through the list until you reach the index and return
+        // the node at that specific index
+        let currentNode = this.head;
+        let count = 0;
+
+        while(currentNode){
+            if(count === index) return currentNode;
+            currentNode = currentNode.next;
+            count++;
+        }
+    }
+
+    // Set Method
+    // This function should accept a value and an index
+    set(index, value){
+        // Use your get function to find the specific node
+        // If the node is not found, return false
+        let foundNode = this.get(index);
+        if(!foundNode) return false;
+        // If the node is found, set the value of the node to be the value
+        // passed to the function and return true
+        foundNode.val = value;
+        return true;
+    }
 }
 
 
 const list = new SinglyLinkedList();
-// list.push("1");
-// list.push("2");
-// list.push("3");
-// list.push("4");
+list.push("1");
+list.push("2");
+list.push("3");
+list.push("4");
 
-console.log(list);
-list.unshift(0);
-console.log(list);
-
-// console.log(list.head)
-// console.log(list.head.next);
-// console.log(list.head.next.next);
-// console.log(list.head.next.next.next);
-
-// head => Node { val: 1, next: null }
-// tail => Node { val: 1, next: this.head => Node {val: 1, next: null }}
-
-// tail => Node { val: 1, next: Node { val: 2, next: null }}
-// head => Node: { val: 1, next: Node { val: 2, next: null}}
-
-// tail => Node {val: 1, next: Node { val: 2, next: null }}
+console.log(list.set(2, "Pikachu"));
+console.log(list.head.next)
