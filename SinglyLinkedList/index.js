@@ -1,5 +1,5 @@
 class Node {
-    constructor(val){
+    constructor(val) {
         this.val = val;
         this.next = null;
     }
@@ -7,7 +7,7 @@ class Node {
 
 
 class SinglyLinkedList {
-    constructor(){
+    constructor() {
         this.length = 0;
         this.head = null;
         this.tail = null;
@@ -15,11 +15,11 @@ class SinglyLinkedList {
 
     // method
     // this function should accept a value
-    push(val){
+    push(val) {
         // create a new node using the value passed to the function
         // if there is no head property on the list, set the head and the
         // tail to be the newly created one
-        if(this.head === null){
+        if (this.head === null) {
             this.head = new Node(val);
             this.tail = this.head; // { val: "1", next: null }
         } else {
@@ -33,20 +33,20 @@ class SinglyLinkedList {
         return this;
     }
 
-    pop(){
+    pop() {
         // If there are no nodes in the list, return undefined
-        if(!this.length) return undefined;
+        if (!this.length) return undefined;
 
         // track the 2nd node to the last tail
         // track the tail
-        let pre  = this.head;
+        let pre = this.head;
         let lastNode = this.head.next;
 
         // Loop through the list until you reach the tail
-        while(lastNode.next){
+        while (lastNode.next) {
             pre = pre.next;
             lastNode = lastNode.next;
-            console.log({ pre, lastNode})
+            console.log({pre, lastNode})
         }
 
         // set the next property of the 2nd to last node to be null
@@ -58,28 +58,28 @@ class SinglyLinkedList {
         return lastNode;
     }
 
-    shift(){
+    shift() {
         // If there are no nodes, return undefined
-        if(!this.head) return undefined;
+        if (!this.head) return undefined;
         // Store the current head property in a variable
         let currentHead = this.head;
         // Set the head property to be the current head's next property
         this.head = currentHead.next
         // Decrement the length by 1
         this.length--;
-        if(!this.length) this.tail = null;
+        if (!this.length) this.tail = null;
         // Return the value of the node removed
         currentHead.next = null;
         return currentHead;
     }
 
     // This function should accept a value
-    unshift(val){
+    unshift(val) {
         // Create a new node using the value passed to the function
         const newNode = new Node(val);
         // If there is no head property on the list, set the head and the tail
         // to be the newly created one
-        if(!this.head){
+        if (!this.head) {
             this.head = newNode;
             this.tail = this.head;
         } else {
@@ -98,18 +98,18 @@ class SinglyLinkedList {
 
     // Get Method
     // This function should accept an index
-    get(index){
+    get(index) {
         // If the index is less than zero o greater than or equal to
         // the length of the list, return null
-        if(index < 0 || index >= this.length) return null;
+        if (index < 0 || index >= this.length) return null;
 
         // Loop through the list until you reach the index and return
         // the node at that specific index
         let currentNode = this.head;
         let count = 0;
 
-        while(currentNode){
-            if(count === index) return currentNode;
+        while (currentNode) {
+            if (count === index) return currentNode;
             currentNode = currentNode.next;
             count++;
         }
@@ -117,26 +117,26 @@ class SinglyLinkedList {
 
     // Set Method
     // This function should accept a value and an index
-    set(index, value){
+    set(index, value) {
         // Use your get function to find the specific node
         // If the node is not found, return false
         let foundNode = this.get(index);
-        if(!foundNode) return false;
+        if (!foundNode) return false;
         // If the node is found, set the value of the node to be the value
         // passed to the function and return true
         foundNode.val = value;
         return true;
     }
 
-    insert(index, value){
+    insert(index, value) {
         // Create a new Node
         const newNode = new Node(value);
         // If the index is less than zero or greater than the length, return false,
-        if(index < 0 || index > this.length) return false
+        if (index < 0 || index > this.length) return false
         // If the index is the same as the length, push a new node to the end of the list
-        if(index === this.length) return !!this.push(value)
+        if (index === this.length) return !!this.push(value)
         // If the index is 0, unshift a new node to the start of the list
-        if(index === 0) return !!this.unshift(value);
+        if (index === 0) return !!this.unshift(value);
         // Otherwise, using the get method, access the node at the index -1
         const nodeFound = this.get(index - 1);
         const prevNode = nodeFound.next;
@@ -149,6 +149,26 @@ class SinglyLinkedList {
         // return true
         return true;
     }
+
+    remove(index) {
+        // if the index is less than zero or greater than the length, return undefined
+        if (index < 0 || index >= this.length) return undefined;
+        // If the index is the same as the length - 1, pop
+        if (index === this.length - 1) return this.pop();
+        // If the index is 0, shift
+        if (index === 0) return this.shift()
+        // Otherwise, using the get method, access the node at the index - 1
+        let prevNode = this.get(index - 1);
+        let removedNode = prevNode.next;
+        // Set the next property on that node to be the next of the next node
+        prevNode.next = removedNode.next;
+        // Decrement the length
+        this.length--;
+        // Return the value of the node removed
+        return removedNode;
+
+
+    }
 }
 
 
@@ -157,6 +177,8 @@ list.push("1");
 list.push("2");
 list.push("3");
 list.push("4");
-console.log(list.insert(1, "pikachu"));
-console.log(list.insert(0, "Snorlax"));
-console.log(list.insert(6, "squitel"));
+// console.log(list.insert(1, "pikachu"));
+// console.log(list.insert(0, "Snorlax"));
+// console.log(list.insert(6, "squitel"));
+console.log(list.remove(0))
+console.log(list)
