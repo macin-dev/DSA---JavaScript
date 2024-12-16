@@ -127,6 +127,28 @@ class SinglyLinkedList {
         foundNode.val = value;
         return true;
     }
+
+    insert(index, value){
+        // Create a new Node
+        const newNode = new Node(value);
+        // If the index is less than zero or greater than the length, return false,
+        if(index < 0 || index > this.length) return false
+        // If the index is the same as the length, push a new node to the end of the list
+        if(index === this.length) return !!this.push(value)
+        // If the index is 0, unshift a new node to the start of the list
+        if(index === 0) return !!this.unshift(value);
+        // Otherwise, using the get method, access the node at the index -1
+        const nodeFound = this.get(index - 1);
+        const prevNode = nodeFound.next;
+        // Set the next property on that node to be the new node
+        nodeFound.next = newNode;
+        // Set the next property on the new node to be the previous next
+        newNode.next = prevNode;
+        // Increment the length
+        this.length++;
+        // return true
+        return true;
+    }
 }
 
 
@@ -135,6 +157,6 @@ list.push("1");
 list.push("2");
 list.push("3");
 list.push("4");
-
-console.log(list.set(2, "Pikachu"));
-console.log(list.head.next)
+console.log(list.insert(1, "pikachu"));
+console.log(list.insert(0, "Snorlax"));
+console.log(list.insert(6, "squitel"));
