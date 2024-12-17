@@ -166,8 +166,32 @@ class SinglyLinkedList {
         this.length--;
         // Return the value of the node removed
         return removedNode;
+    }
 
+    traverse() {
+        // Swap the head and the tail
+        const head = this.head;
+        this.head = this.tail;
+        this.tail = head;
+        // Create a variable called next
+        let nextNode = null
+        // Create a variable called prev
+        let prevNode = null;
+        // Create a variable called node and initialize it to the head property
+        let currentNode = head;
+        // Loop through the list
+        while(currentNode !== null) {
+            // Set next to be the next property on whatever node is
+            // Set the next property on the node to be whatever prev is
+            // Set prev to be the value of the node variable
+            // Set the node variable to be the value of the next variable
+            nextNode = currentNode.next;
+            currentNode.next = prevNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
 
+        return this;
     }
 }
 
@@ -180,5 +204,4 @@ list.push("4");
 // console.log(list.insert(1, "pikachu"));
 // console.log(list.insert(0, "Snorlax"));
 // console.log(list.insert(6, "squitel"));
-console.log(list.remove(0))
-console.log(list)
+console.log(list.traverse())
