@@ -39,23 +39,26 @@ class SinglyLinkedList {
 
         // track the 2nd node to the last tail
         // track the tail
-        let pre = this.head;
-        let lastNode = this.head.next;
+        let current = this.head;
+        let newTail = current;
 
         // Loop through the list until you reach the tail
-        while (lastNode.next) {
-            pre = pre.next;
-            lastNode = lastNode.next;
-            console.log({pre, lastNode})
+        while (current.next) {
+            newTail = current;
+            current = current.next;
         }
 
         // set the next property of the 2nd to last node to be null
-        pre.next = null;
+        newTail.next = null;
         // set the tail to be the 2nd to last node
-        this.tail = pre;
+        this.tail = newTail;
         // decrement the length of te list by 1
         this.length--;
-        return lastNode;
+        if(this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return current;
     }
 
     shift() {
@@ -201,7 +204,8 @@ list.push("1");
 list.push("2");
 list.push("3");
 list.push("4");
-// console.log(list.insert(1, "pikachu"));
-// console.log(list.insert(0, "Snorlax"));
-// console.log(list.insert(6, "squitel"));
-console.log(list.traverse())
+console.log(list.pop())
+console.log(list.pop())
+console.log(list.pop())
+console.log(list.pop())
+console.log(list)
