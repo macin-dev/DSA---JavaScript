@@ -35,9 +35,61 @@ class DoublyLinkedList {
     // 7. return the doubly linked list
     return this;
   }
+
+  // pop method
+  pop() {
+    // if there is no head,return undefined
+    if (!this.head) return undefined;
+    // sotre the current tail in a variable to return later
+    const popped = this.tail;
+    // if the length is 1, set the head and tail to be null
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      // otherwise update the tail to be the previous node
+      this.tail = popped.prev;
+      // set the new tail's next to null
+      this.tail.next = null;
+      popped.prev = null;
+    }
+    // decrement the length
+    this.length--;
+    // return the value removed
+    return popped;
+  }
+
+  shift() {
+    // if there is 0, return undefined
+    if (!this.tail) return undefined;
+    // store the current head property in a variable
+    const oldHead = this.head;
+    // if the length is 1, set the head and the tail to be null
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      // update the head to be the next of the old head
+      this.head = oldHead.next;
+      // set the head's prev property to null
+      this.head.prev = null;
+      // set the old head's next to null
+      oldHead.next = null;
+    }
+    // decrement the length
+    this.length--;
+    // return old head
+    return oldHead;
+  }
 }
 
 let newList = new DoublyLinkedList();
-console.log(newList.push("5"));
-console.log(newList.push("100"));
-console.log(newList.push("200"));
+newList.push("5");
+newList.push("100");
+newList.push("200");
+console.log(newList.shift());
+console.log(newList.head);
+console.log(newList.shift());
+console.log(newList.head);
+console.log(newList.shift());
+console.log(newList.shift());
