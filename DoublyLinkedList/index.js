@@ -102,12 +102,42 @@ class DoublyLinkedList {
     // return the list
     return this;
   }
+
+  get(index) {
+    const middle = Math.floor(this.length / 2);
+    // if the index is less than 0 or greater or equal to the length, return null
+    if (index < 0 || index >= this.length) return null;
+    // if the index is less than or equal to half the length of the list
+    // loop through the list starting from the head and loop towards the middle
+    // return the node once it is found
+    let counter, node;
+
+    if (index <= middle) {
+      node = this.head;
+      counter = 0;
+      while (counter !== index) {
+        node = node.next;
+        counter++;
+      }
+    } else {
+      // if the index is greater than half the length of the list
+      // loop throughthe list starting from the tail and loop towards the middle
+      // returnthe node once it is found
+      node = this.tail;
+      counter = this.length - 1;
+      while (counter !== index) {
+        node = node.prev;
+        counter--;
+      }
+    }
+    return node;
+  }
 }
 
 let newList = new DoublyLinkedList();
-// newList.push("5");
-// newList.push("100");
-// newList.push("200");
+newList.push("5");
+newList.push("100");
+newList.push("200");
 newList.unshift(900);
 newList.unshift(1000);
-console.log(newList);
+console.log(newList.get(1));
