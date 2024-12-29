@@ -81,15 +81,33 @@ class DoublyLinkedList {
     // return old head
     return oldHead;
   }
+
+  unshift(val) {
+    // create a new node with the value passed to tge function
+    const node = new Node(val);
+    // if length is 0 set the head and the tail to be the new node
+    if (this.length === 0) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      // otherwise, set the prev property on the head of the list to be the new node
+      this.head.prev = node;
+      // set the next property on the new node to be the head property
+      node.next = this.head;
+      // update the head to be the new node
+      this.head = node;
+    }
+    // increment the length
+    this.length++;
+    // return the list
+    return this;
+  }
 }
 
 let newList = new DoublyLinkedList();
-newList.push("5");
-newList.push("100");
-newList.push("200");
-console.log(newList.shift());
-console.log(newList.head);
-console.log(newList.shift());
-console.log(newList.head);
-console.log(newList.shift());
-console.log(newList.shift());
+// newList.push("5");
+// newList.push("100");
+// newList.push("200");
+newList.unshift(900);
+newList.unshift(1000);
+console.log(newList);
